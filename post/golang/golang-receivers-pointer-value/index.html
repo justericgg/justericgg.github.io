@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="" />
+<meta name="description" content="Personal blog." />
+<meta name="keywords" content="blog, tech, golang, go" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.48" />
+
+<link rel="canonical" href="/post/golang/golang-receivers-pointer-value/">
+<meta property="og:title" content="Go: method receivers - pointer 還是 value" />
+<meta property="og:description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
+一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
+引用官方 FAQ 的一段話
+ If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/golang/golang-receivers-pointer-value/" /><meta property="article:published_time" content="2018-09-09T15:10:43&#43;08:00"/>
+<meta property="article:modified_time" content="2018-09-09T15:10:43&#43;08:00"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go: method receivers - pointer 還是 value"/>
+<meta name="twitter:description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
+一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
+引用官方 FAQ 的一段話
+ If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used."/>
+
+
+
+<meta itemprop="name" content="Go: method receivers - pointer 還是 value">
+<meta itemprop="description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
+一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
+引用官方 FAQ 的一段話
+ If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used.">
+
+
+<meta itemprop="datePublished" content="2018-09-09T15:10:43&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-09T15:10:43&#43;08:00" />
+<meta itemprop="wordCount" content="167">
+
+
+
+<meta itemprop="keywords" content="" />
+
+
+<link rel="stylesheet" href="/css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+
+<title>
+
+
+     Go: method receivers - pointer 還是 value 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">Eric.G&#39;s BLOG</a>
+    </div> 
+
+    
+    
+    <a class="nav-item active" href="/post/algorithm/"><div class="nav-item-title"></div></a>
+    
+    <a class="nav-item" href="/post/algorithm/"><div class="nav-item-title">Algorithm 演算法</div></a>
+    
+    <a class="nav-item" href="/post/golang"><div class="nav-item-title">Golang</div></a>
+    
+
+  </nav>
+</div>
+
+  
+<div class="social-links-header">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Go: method receivers - pointer 還是 value </h1>
+    <div class="content"> 
+
+<p>初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人</p>
+
+<h2 id="一致性-讓所有人都有一致的理解">一致性 -&gt; 讓所有人都有一致的理解</h2>
+
+<p>把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事</p>
+
+<p>引用官方 FAQ 的一段話</p>
+
+<blockquote>
+<p>If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used.</p>
+</blockquote>
+
+<p>簡單來說就是，如果有一個 method receiver 的 type (常見是一個 struct) 是指定為 pointer，那就應該都要一致的用 pointer，好難解釋，我們看例子</p>
+
+<pre><code class="language-go">
+    // 如果你有一個 method 是這樣子定義的
+    func (s *MyStruct) pointerMethod() { }
+
+    // 那其他跟這個 MyStruct 相關的 method 就一致的用 pointer receiver
+    func (s *MyStruct) anotherPointerMethod() { }
+    
+</code></pre>
+
+<p>這樣子在開發中才比較不會讓其他工程師誤會這組 methods 的行為</p>
+
+<h2 id="你應該考慮的幾點">你應該考慮的幾點</h2>
+
+<p>在決定要使用 pointer receiver 還是 value receiver 時，應該要考慮到以下幾點</p>
+
+<h3 id="需要修改這個-receiver-嗎">需要修改這個 receiver 嗎？</h3>
+
+<p>如果 method 是需要修改 receiver 的值，那你應該要使用 pointer，因為在 Go 裡所有的 function 都是會 copy 一份傳入的參數，看下面的例子</p>
+
+<pre><code class="language-go">
+    package main
+
+    import &quot;fmt&quot;
+
+    type person struct {
+        name string
+    }
+
+    func (p person) rename1(newName string) {
+        p.name = newName
+    }
+
+    func (p *person) rename2(newName string) {
+        (*p).name = newName
+    }
+
+    func main() {
+        p := person{&quot;Eric&quot;}
+
+        p.rename1(&quot;James&quot;)
+        fmt.Println(p.name) // p.name 還是 Eric
+
+        p.rename2(&quot;9n&quot;)
+        fmt.Println(p.name) // p.name 變成 9n 了
+    }
+
+</code></pre>
+
+<h3 id="receiver-會不會很大">Receiver 會不會很大？</h3>
+
+<p>如上所言，如果一個傳入的 receiver 很大，copy 一份傳入的參數是很浪費效能的一件事</p>
+
+<h3 id="concurrency">Concurrency</h3>
+
+<p>因為是 pointer 所以你得注意 concurrency 的情況，所以若沒有以上考量與程式一致性的考量，用 value 相對來說副作用是比較小的</p>
+
+<h4 id="參考資料">參考資料:</h4>
+
+<p><a href="https://golang.org/doc/faq#methods_on_values_or_pointers">https://golang.org/doc/faq#methods_on_values_or_pointers</a>
+<a href="https://golang.org/doc/faq#different_method_sets">https://golang.org/doc/faq#different_method_sets</a></p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+</div>
+
+    <div class="date"> Sep 9, 2018 </div>
+  </div>
+
+</footer>
+
+
+  
+
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright">  </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+
+</body>
+</html>
+

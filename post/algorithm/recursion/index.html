@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="" />
+<meta name="description" content="Personal blog." />
+<meta name="keywords" content="blog, tech, golang, go" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.48" />
+
+<link rel="canonical" href="/post/algorithm/recursion/">
+<meta property="og:title" content="Recursion 遞迴" />
+<meta property="og:description" content="今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去
+什麼是 Recursion 先來看看 Wiki 怎麼說
+ Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/algorithm/recursion/" /><meta property="article:published_time" content="2018-09-13T09:50:15&#43;08:00"/>
+<meta property="article:modified_time" content="2018-09-13T09:50:15&#43;08:00"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Recursion 遞迴"/>
+<meta name="twitter:description" content="今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去
+什麼是 Recursion 先來看看 Wiki 怎麼說
+ Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration)."/>
+
+
+
+<meta itemprop="name" content="Recursion 遞迴">
+<meta itemprop="description" content="今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去
+什麼是 Recursion 先來看看 Wiki 怎麼說
+ Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration).">
+
+
+<meta itemprop="datePublished" content="2018-09-13T09:50:15&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-13T09:50:15&#43;08:00" />
+<meta itemprop="wordCount" content="413">
+
+
+
+<meta itemprop="keywords" content="" />
+
+
+<link rel="stylesheet" href="/css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+
+<title>
+
+
+     Recursion 遞迴 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">Eric.G&#39;s BLOG</a>
+    </div> 
+
+    
+    
+    <a class="nav-item active" href="/post/algorithm/"><div class="nav-item-title"></div></a>
+    
+    <a class="nav-item" href="/post/algorithm/"><div class="nav-item-title">Algorithm 演算法</div></a>
+    
+    <a class="nav-item" href="/post/golang"><div class="nav-item-title">Golang</div></a>
+    
+
+  </nav>
+</div>
+
+  
+<div class="social-links-header">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Recursion 遞迴 </h1>
+    <div class="content"> 
+
+<p>今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去</p>
+
+<h2 id="什麼是-recursion">什麼是 Recursion</h2>
+
+<p>先來看看 Wiki 怎麼說</p>
+
+<blockquote>
+<p>Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). The approach can be applied to many types of problems, and recursion is one of the central ideas of computer science.</p>
+</blockquote>
+
+<p>好的&hellip;所以這在講什麼鬼，我們來用比較生活上的例子來說</p>
+
+<p>有一天小明去湖邊玩耍，不小心手滑了一下，手機掉到湖裡，突然間風雲變色，湖中跑出一個像中年大叔的精靈，
+手上拿著好幾支 iPhone，與小明展開了以下的對話</p>
+
+<pre><code>湖中精靈: 請問這是你的 iPhone 7 嗎？
+小明: 不是耶
+湖中精靈: 這是你的 iPhone 8 嗎？
+小明: 也不是耶
+湖中精靈: 那這是你的 iPhone X 嗎？
+小明: 不是唷
+湖中精靈: 難不成你的手機是這支 iPhone XS 嗎？
+小明: 不是...
+湖中精靈: 我沒手機可以問了...
+小明: 那你滾吧...
+</code></pre>
+
+<p>話說，這是哪門子的生活上的例子&hellip;</p>
+
+<p>所以我們可以從 Wiki 看到，把一個大問題(這是你的手機嗎)，以重複將問題分解成較小的子問題(很笨的一隻一隻手機問)來得到答案的一種解決方法，就叫 Recursion(遞迴)</p>
+
+<p>我們再來看一句 Wiki 上面說的</p>
+
+<blockquote>
+<p>Most computer programming languages support recursion by allowing a function to call itself from within its own code. Some functional programming languages do not define any looping constructs but rely solely on recursion to repeatedly call code.</p>
+</blockquote>
+
+<p>我們在寫程式常常會用一個 function 去呼叫 function 自己本身的方式來達到遞迴的效果，這聽起來有點像 loop
+的概念，在某些 functional program 裡甚至沒有 loop 的語法，因為你可以用遞迴來達到一樣的效果</p>
+
+<p>所以小明在這裡扮演的是一個 function (回答手機是不是他的)，湖中精靈就是呼叫這個 function 的 caller (不斷的一直問類似的問題)，
+直到沒問題可以問，所以小明就叫精靈不要再問了 (結束條件)</p>
+
+<h2 id="recursion-二個重要的元素">Recursion 二個重要的元素</h2>
+
+<p>我們實作遞迴時，需要滿足以下兩個重要的元素</p>
+
+<ul>
+<li>結束的條件</li>
+<li>變動的輸入</li>
+</ul>
+
+<h3 id="結束的條件">結束的條件</h3>
+
+<p>你需要為這個遞迴設定一個結束的條件，不然就會一直無限循環下去</p>
+
+<p>比如家務有拖地、澆花、洗碗這三個問題要問，問完了就沒問題要問了</p>
+
+<h3 id="變動的輸入">變動的輸入</h3>
+
+<p>跟結束的條件有點關係，因為不給定變動的輸入就永遠不會跳到可以結束點，一樣會一直無限循環</p>
+
+<p>如果你問完拖地了嗎，又問拖地了嗎，這就非常的鬼打牆</p>
+
+<h3 id="你還是會想一直循環">你還是會想一直循環</h3>
+
+<p>當然寫程式時某些情況下我們會希望一直循環，比如定期檢查一個狀態，但你還是得了解以上兩點，
+這樣你才能很清楚的知道你寫的程式會發生什麼樣的行為</p>
+
+<h2 id="一個簡單的例子">一個簡單的例子</h2>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+)
+
+func recursivePrintNum(num int) {
+
+	if num == 0 {
+		fmt.Println(&quot;I'm done&quot;)
+		return
+	}
+
+	fmt.Println(num)
+	num--
+	recursivePrintNum(num)
+
+}
+
+func main() {
+	recursivePrintNum(10)
+}
+</code></pre>
+
+<p>我們定義了一個 function 叫 recursivePrintNum 傳入一個整數，並依序印出這些整數，直到數字不是 0，
+可以看到這個遞迴有滿足上一節提到的 &ldquo;結束的條件&rdquo; 與 &ldquo;變動的輸入&rdquo;</p>
+
+<ul>
+<li>結束的條件: 定義當 num 為 0 的時候跳出 function</li>
+<li>變動的輸入: 每次印完 num 就將 num 減 1，並呼叫自己</li>
+</ul>
+
+<h2 id="一個實際的應用">一個實際的應用</h2>
+
+<p>看完了簡單的例子後，你心中一定會有個疑問，所以我們可以用遞迴做些什麼事</p>
+
+<h3 id="用遞迴遍歷樹節點">用遞迴遍歷樹節點</h3>
+
+<p>來看一下流程</p>
+
+<ol>
+<li>建立遍歷樹節點 function 可傳入一個節點</li>
+<li>若傳入的節點還包含其他節點，loop 這些節點，並把各節點傳入給這個 function</li>
+<li>若傳入的節點沒有其他節點了，跳出這個 function</li>
+</ol>
+
+<h3 id="抓取-html-檔案內所有的-img-source">抓取 html 檔案內所有的 img source</h3>
+
+<p>我們知道 html 是一個樹節構，所以我們可以用遞迴來取得在節點中想要的資料，來看一下範例</p>
+
+<pre><code class="language-html">&lt;body&gt;
+    &lt;div&gt;
+        &lt;img src=&quot;a.jpg&quot; alt=&quot;&quot;&gt;
+        &lt;p&gt;
+            &lt;img src=&quot;b.jpg&quot; alt=&quot;&quot;&gt;
+            &lt;p&gt;Hi&lt;/p&gt;
+            &lt;p&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;img src=&quot;c.jpg&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+                    &lt;li&gt;I'm li&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/p&gt;
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+	&quot;io/ioutil&quot;
+	&quot;log&quot;
+	&quot;strings&quot;
+
+	&quot;golang.org/x/net/html&quot;
+)
+
+// 這裡會傳入一個 html 的一個節點
+func getImageSrc(n *html.Node) {
+
+	// 查看目前這個節點是不是 &lt;img&gt;
+	if n.Type == html.ElementNode &amp;&amp; n.Data == &quot;img&quot; {
+
+		// 遍歷 &lt;img&gt; 裡的 attributes
+		for _, a := range n.Attr {
+
+			//找到 &lt;img&gt; 裡 src 這個 attributes
+			if a.Key == &quot;src&quot; {
+				fmt.Println(a.Val)
+				break
+			}
+		}
+	}
+
+	// 這裡如果有子節點就會執行 getImageSrc 並把這個子節點傳入參數
+	// 如果這個子節點還有兄弟節點，就會一個一個將兄弟節點也丟到 getImageSrc 裡
+	// 直到沒有子節點為止 getImageSrc 將不再被呼叫
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		getImageSrc(c)
+	}
+}
+
+func main() {
+
+	//這邊讀入我們的 html 檔案，實際上可能會是從網址抓取
+	bs, err := ioutil.ReadFile(&quot;index.html&quot;)
+	if err != nil {
+		log.Fatalf(&quot;Read file error %v&quot;, err)
+	}
+
+	//將讀取回來的內容傳換成 html doc 結構
+	doc, err := html.Parse(strings.NewReader(string(bs)))
+	if err != nil {
+		log.Fatalf(&quot;Html parsing error %v&quot;, err)
+	}
+
+	//開始呼叫我們的遞迴 function
+	getImageSrc(doc)
+}
+
+</code></pre>
+
+<p>HTML 為了簡單，這邊只從 body tag 開始給範例</p>
+
+<p>執行程式碼後，可以看到我們走訪了整個 html doc，並且把所有 img tag 內的 src 輸出到 console</p>
+
+<p>這裡有個延申閱讀的部分，以上的做法基本上是用深度優先的方式走訪，還有其他的方式就先留給給大家自行上網找答案了</p>
+
+<h4 id="參考資料">參考資料:</h4>
+
+<p><a href="https://en.wikipedia.org/wiki/Recursion_(computer_science">https://en.wikipedia.org/wiki/Recursion_(computer_science</a>)</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+</div>
+
+    <div class="date"> Sep 13, 2018 </div>
+  </div>
+
+</footer>
+
+
+  
+
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright">  </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+
+</body>
+</html>
+

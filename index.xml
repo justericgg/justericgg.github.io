@@ -6,9 +6,33 @@
     <description>Recent content on Eric.G&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
+    <lastBuildDate>Thu, 13 Sep 2018 09:50:15 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Recursion 遞迴</title>
+      <link>/post/algorithm/recursion/</link>
+      <pubDate>Thu, 13 Sep 2018 09:50:15 +0800</pubDate>
+      
+      <guid>/post/algorithm/recursion/</guid>
+      <description>今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去
+什麼是 Recursion 先來看看 Wiki 怎麼說
+ Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration).</description>
+    </item>
+    
+    <item>
+      <title>Go: method receivers - pointer 還是 value</title>
+      <link>/post/golang/golang-receivers-pointer-value/</link>
+      <pubDate>Sun, 09 Sep 2018 15:10:43 +0800</pubDate>
+      
+      <guid>/post/golang/golang-receivers-pointer-value/</guid>
+      <description>初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
+一致性 -&amp;gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
+引用官方 FAQ 的一段話
+ If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used.</description>
+    </item>
     
   </channel>
 </rss>
