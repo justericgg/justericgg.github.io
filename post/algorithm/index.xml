@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Eric.G&#39;s BLOG</title>
+    <title>EricG&#39;s BLOG</title>
     <link>/post/algorithm/</link>
-    <description>Recent content on Eric.G&#39;s BLOG</description>
+    <description>Recent content on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Thu, 13 Sep 2018 09:50:15 +0800</lastBuildDate>
@@ -17,9 +17,7 @@
       <pubDate>Thu, 13 Sep 2018 09:50:15 +0800</pubDate>
       
       <guid>/post/algorithm/recursion/</guid>
-      <description>今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去
-什麼是 Recursion 先來看看 Wiki 怎麼說
- Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration).</description>
+      <description>今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去 什麼是 Recursion 先來看看 Wiki 怎麼說 Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as</description>
     </item>
     
   </channel>

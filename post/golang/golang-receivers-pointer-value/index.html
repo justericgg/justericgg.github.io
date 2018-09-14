@@ -1,172 +1,173 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
-
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="author" content="" />
-<meta name="description" content="Personal blog." />
-<meta name="keywords" content="blog, tech, golang, go" />
-<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go: method receivers - pointer 還是 value - EricG&#39;s BLOG</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Eric G. Huang" />
+  <meta name="description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人 一致性 -&amp;gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團" />
+
+  <meta name="keywords" content="golang, go, algorithm" />
+
+
+
+
+
+
 <meta name="generator" content="Hugo 0.48" />
 
-<link rel="canonical" href="/post/golang/golang-receivers-pointer-value/">
+
+<link rel="canonical" href="/post/golang/golang-receivers-pointer-value/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
 <meta property="og:title" content="Go: method receivers - pointer 還是 value" />
-<meta property="og:description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
-一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
-引用官方 FAQ 的一段話
- If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used." />
+<meta property="og:description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人 一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/golang/golang-receivers-pointer-value/" /><meta property="article:published_time" content="2018-09-09T15:10:43&#43;08:00"/>
 <meta property="article:modified_time" content="2018-09-09T15:10:43&#43;08:00"/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go: method receivers - pointer 還是 value"/>
-<meta name="twitter:description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
-一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
-引用官方 FAQ 的一段話
- If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used."/>
-
-
-
 <meta itemprop="name" content="Go: method receivers - pointer 還是 value">
-<meta itemprop="description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人
-一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團隊的事，減少誤會一直是很重要的事
-引用官方 FAQ 的一段話
- If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used.">
+<meta itemprop="description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人 一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團">
 
 
 <meta itemprop="datePublished" content="2018-09-09T15:10:43&#43;08:00" />
 <meta itemprop="dateModified" content="2018-09-09T15:10:43&#43;08:00" />
-<meta itemprop="wordCount" content="167">
+<meta itemprop="wordCount" content="507">
 
 
 
 <meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go: method receivers - pointer 還是 value"/>
+<meta name="twitter:description" content="初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人 一致性 -&gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團"/>
 
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
 
-<link rel="stylesheet" href="/css/layout.css" />
-<style type="text/css">
-body {
-  background-color: #101010;
-  color: #dbdbdb;
-}
-
-a { color: #dbdbdb; }
-
-pre {
-  background: #1D1F21;
-  border: 1px solid #dbdbdb;
-  border-radius: 5px;
-}
-
-code {
-  background: #1D1F21;
-}
-
-blockquote {
-  background: #1D1F21;
-  border-left: 3px solid #dbdbdb;
-}
-
-table {
-  margin: 1em auto;
-  border-collapse: collapse;
-}
-
-table, th, td {
-  border: 1px solid #dbdbdb;
-}
-
-th {
-  background: #dbdbdb;
-  color: #101010;
-}
-
-.siteTitle a { color: #99cc66; }
-
-.post .content h1{ color: #99cc66; }
-.post .content h2{ color: #99cc66; }
-.post .content h3{ color: #99cc66; }
-.post .content h4{ color: #99cc66; }
-.post .content h5{ color: #99cc66; }
-.post .content h6{ color: #99cc66; }
-.post .content a:hover { color: #99cc66; }
-.social-link:hover { color: #99cc66; }
-.nav-item-title:hover { color: #99cc66; }
-.tag a:hover { color: #99cc66; }
-.copyright { color: #404040 }
-.poweredby { color: #404040 }
-.poweredby a { color: #404040; }
-.post-preview .title a{ color: #99cc66; }
-.content-item a:hover{
-  text-decoration: underline;
-  color: #99cc66;
-}
-.post-list .title { color: #99cc66; }
-.rmore { color: #99cc66; }
-.terms .term a:hover {
-  text-decoration: underline;
-  color: #99cc66;
-}
-
-</style>
-
-
-
-<title>
-
-
-     Go: method receivers - pointer 還是 value 
-
-</title>
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
 
 </head>
-
-
 <body>
-<div class="main">
-<header>
-
-<div class="header-bar">
-
-  <nav>
-    <div class="siteTitle">
-      <a href="/">Eric.G&#39;s BLOG</a>
-    </div> 
-
-    
-    
-    <a class="nav-item active" href="/post/algorithm/"><div class="nav-item-title"></div></a>
-    
-    <a class="nav-item" href="/post/algorithm/"><div class="nav-item-title">Algorithm 演算法</div></a>
-    
-    <a class="nav-item" href="/post/golang"><div class="nav-item-title">Golang</div></a>
-    
-
-  </nav>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">EricG&#39;s BLOG</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/algorithm/">
+        <li class="mobile-menu-item">Algorithm</li>
+      </a><a href="/post/golang">
+        <li class="mobile-menu-item">Golang</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">EricG&#39;s BLOG</a>
 </div>
 
-  
-<div class="social-links-header">
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/algorithm/">Algorithm</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/golang">Golang</a>
+      </li>
+  </ul>
+</nav>
+    </header>
 
-  
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Go: method receivers - pointer 還是 value</h1>
 
-  
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-09 </span>
+        
+        
+        
+      </div>
+    </header>
 
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
   
-
-  
-
-  
-
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#一致性-讓所有人都有一致的理解">一致性 -&gt; 讓所有人都有一致的理解</a></li>
+<li><a href="#你應該考慮的幾點">你應該考慮的幾點</a>
+<ul>
+<li><a href="#需要修改這個-receiver-嗎">需要修改這個 receiver 嗎？</a></li>
+<li><a href="#receiver-會不會很大">Receiver 會不會很大？</a></li>
+<li><a href="#concurrency">Concurrency</a>
+<ul>
+<li><a href="#參考資料">參考資料:</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
 </div>
 
+    
+    
 
-</header>
-
-
-<article class="post">
-    <h1 class="title"> Go: method receivers - pointer 還是 value </h1>
-    <div class="content"> 
+    
+    <div class="post-content">
+      
 
 <p>初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人</p>
 
@@ -242,57 +243,93 @@ th {
 
 <p><a href="https://golang.org/doc/faq#methods_on_values_or_pointers">https://golang.org/doc/faq#methods_on_values_or_pointers</a>
 <a href="https://golang.org/doc/faq#different_method_sets">https://golang.org/doc/faq#different_method_sets</a></p>
- </div>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Eric G. Huang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2018-09-09</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
     <footer class="post-footer">
+      
 
-  <div class="post-footer-data">
-    
-<div class="tags">
-    
+      
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="eric.g.yuan@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/justericgg?tab=repositories" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-    <div class="date"> Sep 9, 2018 </div>
-  </div>
-
-</footer>
-
-
-  
-
-
-</article>
-
-  <footer>
-
-  <div class="social-links-footer">
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
   
 
-  
-
-  
-
-  
-
-  
-
-  <div class="social-link">
-  <a href="/index.xml" target="_blank">RSS</a>
-  </div>
-
+  <span class="copyright-year">
+    &copy; 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Eric G. Huang</span>
+  </span>
 </div>
+    </footer>
 
-
-  <div class="copyright">  </div>
-
-  <div class="poweredby">
-    Powered by <a href="https://gohugo.io/">Hugo</a>.
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
   </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
 
-  </footer>
 
-</div> 
+<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+
+
+
+
+
+
+
 
 </body>
 </html>
-
