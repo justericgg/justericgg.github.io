@@ -6,10 +6,19 @@
     <description>Recent content on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Thu, 13 Sep 2018 09:50:15 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Sep 2018 16:53:45 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linear Search (線性搜尋法)</title>
+      <link>/post/algorithm/linear-search/</link>
+      <pubDate>Sat, 15 Sep 2018 16:53:45 +0800</pubDate>
+      
+      <guid>/post/algorithm/linear-search/</guid>
+      <description>最基本的查詢方法 想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &amp;ldquo;魏瓔珞&amp;rdquo; 的人在這排的第幾個，你要怎麼做呢？ 最簡</description>
+    </item>
     
     <item>
       <title>Recursion 遞迴 (Golang)</title>

@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/post/algorithm/linear-search/</loc>
+    <lastmod>2018-09-15T16:53:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/post/algorithm/recursion/</loc>
     <lastmod>2018-09-13T09:50:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -18,7 +25,7 @@
   
   <url>
     <loc>/post/algorithm/</loc>
-    <lastmod>2018-09-13T09:50:15+08:00</lastmod>
+    <lastmod>2018-09-15T16:53:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,7 +45,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-09-13T09:50:15+08:00</lastmod>
+    <lastmod>2018-09-15T16:53:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

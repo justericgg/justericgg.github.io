@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linear Search (線性搜尋法) - EricG&#39;s BLOG</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Eric G. Huang" />
+  <meta name="description" content="最基本的查詢方法 想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &amp;ldquo;魏瓔珞&amp;rdquo; 的人在這排的第幾個，你要怎麼做呢？ 最簡" />
+
+  <meta name="keywords" content="golang, go, algorithm" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.48" />
+
+
+<link rel="canonical" href="/post/algorithm/linear-search/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Linear Search (線性搜尋法)" />
+<meta property="og:description" content="最基本的查詢方法 想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &ldquo;魏瓔珞&rdquo; 的人在這排的第幾個，你要怎麼做呢？ 最簡" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/algorithm/linear-search/" /><meta property="article:published_time" content="2018-09-15T16:53:45&#43;08:00"/>
+<meta property="article:modified_time" content="2018-09-15T16:53:45&#43;08:00"/>
+<meta itemprop="name" content="Linear Search (線性搜尋法)">
+<meta itemprop="description" content="最基本的查詢方法 想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &ldquo;魏瓔珞&rdquo; 的人在這排的第幾個，你要怎麼做呢？ 最簡">
+
+
+<meta itemprop="datePublished" content="2018-09-15T16:53:45&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-15T16:53:45&#43;08:00" />
+<meta itemprop="wordCount" content="680">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linear Search (線性搜尋法)"/>
+<meta name="twitter:description" content="最基本的查詢方法 想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &ldquo;魏瓔珞&rdquo; 的人在這排的第幾個，你要怎麼做呢？ 最簡"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">EricG&#39;s BLOG</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/algorithm/">
+        <li class="mobile-menu-item">Algorithm</li>
+      </a><a href="/post/golang">
+        <li class="mobile-menu-item">Golang</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">EricG&#39;s BLOG</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/algorithm/">Algorithm</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/golang">Golang</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linear Search (線性搜尋法)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-15 </span>
+        
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#最基本的查詢方法">最基本的查詢方法</a></li>
+<li><a href="#來點程式碼">來點程式碼</a></li>
+<li><a href="#時間複雜度">時間複雜度</a></li>
+<li><a href="#o-n">O(n)</a></li>
+<li><a href="#有沒有更好的方法呢">有沒有更好的方法呢？</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<h2 id="最基本的查詢方法">最基本的查詢方法</h2>
+
+<p>想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &ldquo;魏瓔珞&rdquo; 的人在這排的第幾個，你要怎麼做呢？</p>
+
+<p>最簡單的方法就是從第一個人開始，一個一個問名字，這就是我們今天要講的 Linear Search 了</p>
+
+<p>我們來畫個表格，看一下步驟</p>
+
+<p>Step1:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">愛新覺羅·弘曆</td>
+<td align="center">富察·傅恆</td>
+<td align="center">高寧馨</td>
+<td align="center">魏瓔珞</td>
+<td align="center">王小明</td>
+</tr>
+
+<tr>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+
+<p>Step2:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">愛新覺羅·弘曆</td>
+<td align="center">富察·傅恆</td>
+<td align="center">高寧馨</td>
+<td align="center">魏瓔珞</td>
+<td align="center">王小明</td>
+</tr>
+
+<tr>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+
+<p>Step3:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">愛新覺羅·弘曆</td>
+<td align="center">富察·傅恆</td>
+<td align="center">高寧馨</td>
+<td align="center">魏瓔珞</td>
+<td align="center">王小明</td>
+</tr>
+
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+
+<p>Step4:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">愛新覺羅·弘曆</td>
+<td align="center">富察·傅恆</td>
+<td align="center">高寧馨</td>
+<td align="center">魏瓔珞</td>
+<td align="center">王小明</td>
+</tr>
+
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+
+<p>找到 &ldquo;魏瓔珞&rdquo; 了，在第四個位置</p>
+
+<h2 id="來點程式碼">來點程式碼</h2>
+
+<pre><code class="language-go">
+package main
+
+import (
+	&quot;fmt&quot;
+)
+
+func linearSearch(numbers []int, searchNum int) int {
+
+	for index, num := range numbers {
+		if num == searchNum {
+			return index
+		}
+	}
+
+	return -1
+}
+
+func main() {
+
+	numbers := []int{1, 3, 2, 10, 13, 29, 5}
+
+	fmt.Println(linearSearch(numbers, 13)) // Print 4
+	fmt.Println(linearSearch(numbers, 30)) // Print -1
+}
+</code></pre>
+
+<pre><code class="language-javascript">
+// 回傳 array 的 index，若沒找到的話，回傳 -1
+function linearSearch(numbers, searchNum) {
+
+    for (i = 0; i &lt; numbers.length; i++) {
+        if (numbers[i] === searchNum) return i;
+    }
+
+    return -1;
+}
+
+let numbers = [1, 3, 2, 10, 13, 29, 5];
+let resultFound = linearSearch(numbers, 13);
+let resultNotFound = linearSearch(numbers, 30);
+
+console.log(resultFound); // Print 4
+console.log(resultNotFound); // Print -1
+</code></pre>
+
+<h2 id="時間複雜度">時間複雜度</h2>
+
+<p>線性搜尋法是一種非常簡單也好理解的搜尋演算法，反正不管怎樣，我就是一個一個找，直到找到為止，
+因此也造成一個很好理解的瓶頸 - 要找的東西越多，就會找的越久，如果要找的東西在第一個位置的話，
+那恭喜你運氣超好，但我們得用最差的情況來看待它</p>
+
+<h2 id="o-n">O(n)</h2>
+
+<p>拿上面的程式碼例子來說，我們的陣列是 [1, 3, 2, 10, 13, 29, 5]，這裡有7個數字在裡面，若要找到
+5 這個數字的位置，搜尋7次可以找到我們要的東西，現在陣列變成8個數字 [1, 3, 2, 10, 13, 29, 7, 5]，
+我們得找8次，得出一個結論是 - 最差的情況，陣列裡數字的數量與搜尋的次數成正比，所以這是一個
+O(n) 時間複雜度的演算法</p>
+
+<h2 id="有沒有更好的方法呢">有沒有更好的方法呢？</h2>
+
+<p>有的，下次我們來講講 Binary Search (二元搜尋法)</p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Eric G. Huang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2018-09-15</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/algorithm/recursion/">
+            <span class="next-text nav-default">Recursion 遞迴 (Golang)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:eric.g.yuan@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/justericgg?tab=repositories" class="iconfont icon-github" title="github"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Eric G. Huang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
