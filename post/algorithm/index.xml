@@ -6,10 +6,19 @@
     <description>Recent content on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Sat, 15 Sep 2018 16:53:45 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 Sep 2018 13:59:30 +0800</lastBuildDate>
     
 	<atom:link href="/post/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Binary Search (二元搜尋法)</title>
+      <link>/post/algorithm/binary-search/</link>
+      <pubDate>Sun, 16 Sep 2018 13:59:30 +0800</pubDate>
+      
+      <guid>/post/algorithm/binary-search/</guid>
+      <description>在上一篇 - Linear Search (線性搜尋法)，文末提到還有更好的搜尋方法，我們今天就來講講 Binary Search (二元搜尋法) 必要條件 首先，要進行 Binary Search 的集合必需要是排序過的</description>
+    </item>
     
     <item>
       <title>Linear Search (線性搜尋法)</title>
