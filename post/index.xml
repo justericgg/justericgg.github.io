@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on EricG&#39;s BLOG</title>
-    <link>/post/</link>
+    <link>http://justericgg.com/post/</link>
     <description>Recent content in Posts on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://justericgg.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

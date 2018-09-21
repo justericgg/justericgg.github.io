@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EricG&#39;s BLOG</title>
-    <link>/post/golang/</link>
+    <link>http://justericgg.com/post/golang/</link>
     <description>Recent content on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Sun, 09 Sep 2018 15:10:43 +0800</lastBuildDate>
     
-	<atom:link href="/post/golang/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://justericgg.com/post/golang/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Go: method receivers - pointer 還是 value</title>
-      <link>/post/golang/golang-receivers-pointer-value/</link>
+      <link>http://justericgg.com/post/golang/golang-receivers-pointer-value/</link>
       <pubDate>Sun, 09 Sep 2018 15:10:43 +0800</pubDate>
       
-      <guid>/post/golang/golang-receivers-pointer-value/</guid>
+      <guid>http://justericgg.com/post/golang/golang-receivers-pointer-value/</guid>
       <description>初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人 一致性 -&amp;gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團</description>
     </item>
     

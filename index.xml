@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EricG&#39;s BLOG</title>
-    <link>/</link>
+    <link>http://justericgg.com/</link>
     <description>Recent content on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Thu, 20 Sep 2018 19:18:19 +0800</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://justericgg.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>排序: Bubble Sort (氣泡排序法)</title>
-      <link>/post/algorithm/bubble-sort/</link>
+      <link>http://justericgg.com/post/algorithm/bubble-sort/</link>
       <pubDate>Thu, 20 Sep 2018 19:18:19 +0800</pubDate>
       
-      <guid>/post/algorithm/bubble-sort/</guid>
+      <guid>http://justericgg.com/post/algorithm/bubble-sort/</guid>
       <description>Bubble Sort 是什麼 Bubble Sort (氣泡排序法) 是一種很基本的排序演算法，雖然可能它在實際運用上不是那麼實用及有效率，但是學會一些比較基本的排序演算法可以幫助我</description>
     </item>
     
     <item>
       <title>Binary Search (二元搜尋法)</title>
-      <link>/post/algorithm/binary-search/</link>
+      <link>http://justericgg.com/post/algorithm/binary-search/</link>
       <pubDate>Sun, 16 Sep 2018 13:59:30 +0800</pubDate>
       
-      <guid>/post/algorithm/binary-search/</guid>
+      <guid>http://justericgg.com/post/algorithm/binary-search/</guid>
       <description>在上一篇 - Linear Search (線性搜尋法)，文末提到還有更好的搜尋方法，我們今天就來講講 Binary Search (二元搜尋法) 必要條件 首先，要進行 Binary Search 的集合必需要是排序過的</description>
     </item>
     
     <item>
       <title>Linear Search (線性搜尋法)</title>
-      <link>/post/algorithm/linear-search/</link>
+      <link>http://justericgg.com/post/algorithm/linear-search/</link>
       <pubDate>Sat, 15 Sep 2018 16:53:45 +0800</pubDate>
       
-      <guid>/post/algorithm/linear-search/</guid>
+      <guid>http://justericgg.com/post/algorithm/linear-search/</guid>
       <description>最基本的查詢方法 想像一下有一群人在排隊，你現在的任務是要去找到名字叫 &amp;ldquo;魏瓔珞&amp;rdquo; 的人在這排的第幾個，你要怎麼做呢？ 最簡</description>
     </item>
     
     <item>
       <title>Recursion 遞迴 (Golang)</title>
-      <link>/post/algorithm/recursion/</link>
+      <link>http://justericgg.com/post/algorithm/recursion/</link>
       <pubDate>Thu, 13 Sep 2018 09:50:15 +0800</pubDate>
       
-      <guid>/post/algorithm/recursion/</guid>
+      <guid>http://justericgg.com/post/algorithm/recursion/</guid>
       <description>今天來講講 Recursion 遞迴，以下範圍只會提到在電腦科學裡的遞迴，讓我們看下去 什麼是 Recursion 先來看看 Wiki 怎麼說 Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as</description>
     </item>
     
     <item>
       <title>Go: method receivers - pointer 還是 value</title>
-      <link>/post/golang/golang-receivers-pointer-value/</link>
+      <link>http://justericgg.com/post/golang/golang-receivers-pointer-value/</link>
       <pubDate>Sun, 09 Sep 2018 15:10:43 +0800</pubDate>
       
-      <guid>/post/golang/golang-receivers-pointer-value/</guid>
+      <guid>http://justericgg.com/post/golang/golang-receivers-pointer-value/</guid>
       <description>初學 Go 的一些小疑問，查了許多資料，在這邊整理一下，分享給有需要的人 一致性 -&amp;gt; 讓所有人都有一致的理解 把一致性放在一開始說是因為開發畢竟是一個團</description>
     </item>
     
