@@ -6,10 +6,19 @@
     <description>Recent content on EricG&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Sun, 09 Sep 2018 15:10:43 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 08 Oct 2018 09:20:08 +0800</lastBuildDate>
     
 	<atom:link href="http://justericgg.com/post/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Restful API 設計建議</title>
+      <link>http://justericgg.com/post/golang/restful-api-design-recommandation/</link>
+      <pubDate>Mon, 08 Oct 2018 09:20:08 +0800</pubDate>
+      
+      <guid>http://justericgg.com/post/golang/restful-api-design-recommandation/</guid>
+      <description>今天想分享一些基於 Http 的 Restful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp;amp; response 當訪問一個</description>
+    </item>
     
     <item>
       <title>Go: method receivers - pointer 還是 value</title>
