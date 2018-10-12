@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Restful API 設計建議 - EricG&#39;s BLOG</title>
+  <title>RESTful API 設計建議 - EricG&#39;s BLOG</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Eric G. Huang" />
-  <meta name="description" content="今天想分享一些基於 Http 的 Restful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp;amp; response 當訪問一個" />
+  <meta name="description" content="今天想分享一些基於 Http 的 RESTful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp;amp; response 當訪問一個" />
 
   <meta name="keywords" content="golang, go, algorithm" />
 
@@ -49,13 +49,13 @@
 
 
 
-<meta property="og:title" content="Restful API 設計建議" />
-<meta property="og:description" content="今天想分享一些基於 Http 的 Restful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp; response 當訪問一個" />
+<meta property="og:title" content="RESTful API 設計建議" />
+<meta property="og:description" content="今天想分享一些基於 Http 的 RESTful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp; response 當訪問一個" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://justericgg.com/post/golang/restful-api-design-recommandation/" /><meta property="article:published_time" content="2018-10-08T09:20:08&#43;08:00"/>
 <meta property="article:modified_time" content="2018-10-08T09:20:08&#43;08:00"/>
-<meta itemprop="name" content="Restful API 設計建議">
-<meta itemprop="description" content="今天想分享一些基於 Http 的 Restful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp; response 當訪問一個">
+<meta itemprop="name" content="RESTful API 設計建議">
+<meta itemprop="description" content="今天想分享一些基於 Http 的 RESTful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp; response 當訪問一個">
 
 
 <meta itemprop="datePublished" content="2018-10-08T09:20:08&#43;08:00" />
@@ -66,8 +66,8 @@
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Restful API 設計建議"/>
-<meta name="twitter:description" content="今天想分享一些基於 Http 的 Restful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp; response 當訪問一個"/>
+<meta name="twitter:title" content="RESTful API 設計建議"/>
+<meta name="twitter:description" content="今天想分享一些基於 Http 的 RESTful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解 HTTP request &amp; response 當訪問一個"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -126,7 +126,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Restful API 設計建議</h1>
+      <h1 class="post-title">RESTful API 設計建議</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2018-10-08 </span>
@@ -224,7 +224,7 @@
     <div class="post-content">
       
 
-<p>今天想分享一些基於 Http 的 Restful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解</p>
+<p>今天想分享一些基於 Http 的 RESTful API 設計上的一些實用建議，讓我們的 Restful 能夠有著一致性的設計概念，client 在使用上也能夠有更好的理解</p>
 
 <h2 id="http-request-response">HTTP request &amp; response</h2>
 
